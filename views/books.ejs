@@ -1,0 +1,27 @@
+<h1>Books</h1>
+
+<ul>
+  <% books.forEach(function(book){ %>
+    <li><%= book.title %></li>
+    <% }) %>
+</ul>
+
+
+<div id="result">
+
+</div>
+
+<script>
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', '/api/books/5b5bb8201ced2346247824ae')
+  xhr.send()
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      document.getElementById('result').innerHTML = xhr.responseText
+    }
+  }
+  //É isso que os Framweworks FrontEnd utiliza isso para trazer os dados para a tela
+
+</script>
+
