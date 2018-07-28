@@ -3,11 +3,18 @@ const repository = require('../repository/BookRepository')
 
 
 const BookController = {
-  list(request, response, next) {    
-    repository.findAsync({})
+  list(request, response, next) {
+    let query = {}
+
+    if (request.query.title) {
+      query.title = new RegExp('^' + request.query.title, 'i')
+    }
+    
+    repository.findAsync(query)
     .then(data => response.json(data))
     .catch(err => next(err))
   },
+
   getById(request, response, next) {
     const _id = request.params.id
     repository.findByIdAsync(_id)
@@ -15,6 +22,7 @@ const BookController = {
     .catch(next)
     
   },
+
   create(request, response, next) {
     const body = request.body
     repository.createAsync(body)

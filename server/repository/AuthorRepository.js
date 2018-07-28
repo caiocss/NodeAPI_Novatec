@@ -7,11 +7,21 @@ const AuthorRepository = {
     db.query('SELECT * FROM author', callback)
   },
   findById(id, callback) {
-    db.query('SELECT id FROM author', callback)
+    db.query('SELECT * FROM author WHERE id = ?', [id], callback)
   },
-  create() {},
-  update() {},
-  delete() {},
+  create(data, callback) {
+    const sql = `INSERT INTO author (name, birthDate, gender) VALUES (?, ?, ?)`
+    const params = [data.name, data.birthDate, data.gender]
+    db.query(sql, params, callback)
+  },
+  update(id, data, callback) {
+    const sql = `UPDATE author SET name=?, birthDate=?, gender=? WHERE id=?`
+    const params = [data.name, data.birthDate, data.gender, id]
+    db.query(sql, params, callback)
+  },
+  delete(id, callback) {
+    
+  },
 }
 
 module.exports = bluebird.promisifyAll(AuthorRepository)

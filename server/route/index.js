@@ -17,6 +17,10 @@ route.put('/api/books/:id', BookController.update)
 route.delete('/api/books/:id', BookController.delete)
 
 route.get('/api/authors', AuthorController.list)
+route.get('/api/authors/:id', AuthorController.getById)
+route.post('/api/authors/', AuthorController.create)
+route.put('/api/authors/:id', AuthorController.update)
+route.delete('/api/books/:id', AuthorController.delete)
 
 module.exports = route
 
